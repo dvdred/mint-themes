@@ -1,4 +1,3 @@
-
 background yes
 update_interval 1
 
@@ -59,15 +58,16 @@ lua_draw_hook_post main
 ## System information using conky capabilities
 
 TEXT
-${font Ubuntu:bold:size=10}${color4}SYSTEM ${hr 2}
-${offset 15}${font Ubuntu:normal:size=10}${color1}$sysname $kernel
-${offset 15}${font Ubuntu:normal:size=10}${color1}$nodename
-${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: $uptime
+${font Ubuntu:bold:size=10}${color4}SYSTEM: ${alignc}$nodename ${hr 2}
+${offset 15}${font Ubuntu:normal:size=10}${color1}Architecture: ${color4}$sysname $kernel $machine
+${offset 15}${font Ubuntu:normal:size=10}${color1}Local Time: ${color4}$time
+${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: ${color4}$uptime
 
 # Showing CPU Graph
 ${voffset 20}
 ${offset 120}${cpugraph 40,183 666666 666666}${voffset -25}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}CPU
+${offset 105}${font Ubuntu:bold:size=9}${color4}CPU ${hwmon 0 temp 1}°C - GPU ${hwmon 1 temp 2}°C
 # Showing TOP 5 CPU-consumers
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top name 1}${alignr}${top cpu 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top name 2}${alignr}${top cpu 2}%
@@ -76,7 +76,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 4}${alignr}${top c
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 5}${alignr}${top cpu 5}%
 
 #Showing memory part with TOP 5
-${voffset 60}
+${voffset 20}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}MEM
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top_mem name 1}${alignr}${top_mem mem 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top_mem name 2}${alignr}${top_mem mem 2}%
@@ -85,25 +85,32 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${t
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 5}%
 
 # Showing disk partitions: root, home and Data
-${voffset 42}
+${voffset 35}
+${offset 130}${diskiograph 33,183 666666 666666}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}DISKS
-${offset 120}${diskiograph 33,183 666666 666666}${voffset -30}
-${voffset 20}
+#${offset 120}${font Ubuntu:bold:size=9}${color4}${hddtemp /dev/sda}°C
 ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free /}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used /}
 ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free /share}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used /share}
 ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free /DATA}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used /DATA}
 
 # Network data (my desktop have only LAN). ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
-${voffset 70}
+${voffset 20}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}NET
-${voffset 40}             
+${offset 130}${color1}${font Ubuntu:bold:size=9}Local${color4}${alignr}${font Ubuntu:bold:size=9}${addr wlp3s0}
+${offset 130}${color1}${font Ubuntu:bold:size=9}Public${color5}${alignr}${font Ubuntu:bold:size=9}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+${voffset 20}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Up: ${alignr}${font Ubuntu:normal:size=9}$color2${upspeed wlp3s0} / ${totalup wlp3s0}
-${offset 15}${upspeedgraph wlp3s0 40,285 660000 b30000 100}
+${offset 110}${upspeedgraph wlp3s0 40,220 660000 b30000 100}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Down: ${alignr}${font Ubuntu:normal:size=9}$color2${downspeed wlp3s0} / ${totaldown wlp3s0}
-${offset 15}${downspeedgraph wlp3s0 40,285 009999 80ffff 100}
-
+${offset 110}${downspeedgraph wlp3s0 40,220 009999 80ffff 100}
+${offset 5}${color1}${font Ubuntu:bold:size=10}Open ports: ${color5}${tcp_portmon 1 65535 count}
+${offset 10}${color1}${font Ubuntu:bold:size=9}URL${alignr}PORT
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 0}${alignr}${tcp_portmon 1 65535 rport 0}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 1}${alignr}${tcp_portmon 1 65535 rport 1}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 2}${alignr}${tcp_portmon 1 65535 rport 2}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 3}${alignr}${tcp_portmon 1 65535 rport 3}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 4}${alignr}${tcp_portmon 1 65535 rport 4}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 5}${alignr}${tcp_portmon 1 65535 rport 5}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 6}${alignr}${tcp_portmon 1 65535 rport 6}
+#${offset 60}${color1}- ${font Ubuntu:bold:size=9}${color4}${nvidia gpufreq} NVIDIA
 ${color4}${hr 2}
-
-
-
-
