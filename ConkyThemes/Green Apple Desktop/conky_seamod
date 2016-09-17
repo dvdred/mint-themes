@@ -75,7 +75,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 4}${alignr}${top c
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 5}${alignr}${top cpu 5}%
 
 #Showing memory part with TOP 5
-${voffset 40}
+${voffset 60}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}MEM
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top_mem name 1}${alignr}${top_mem mem 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top_mem name 2}${alignr}${top_mem mem 2}%
@@ -84,7 +84,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${t
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 5}%
 
 # Showing disk partitions: root, home and Data
-${voffset 28}
+${voffset 42}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}DISKS
 ${offset 120}${diskiograph 33,183 666666 666666}${voffset -30}
 ${voffset 20}
@@ -93,7 +93,7 @@ ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=
 ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free /DATA}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used /DATA}
 
 # Network data (my desktop have only LAN). ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
-${voffset 43}
+${voffset 70}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}NET
 ${voffset 40}             
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Up: ${alignr}${font Ubuntu:normal:size=9}$color2${upspeed wlp3s0} / ${totalup wlp3s0}
