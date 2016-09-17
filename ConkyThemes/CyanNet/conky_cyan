@@ -102,7 +102,7 @@ ${offset 130}${color1}${font Ubuntu:bold:size=9}Local${color4}${alignr}${font Ub
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Public${color5}${alignr}${font Ubuntu:bold:size=9}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
 ${voffset 20}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Up: ${alignr}${font Ubuntu:normal:size=9}$color2${upspeed wlp3s0} / ${totalup wlp3s0}
-${offset 110}${upspeedgraph wlp3s0 40,220 660000 b30000 100}
+${offset 110}${upspeedgraph wlp3s0 40,220 660000 b30000 -l -t}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Down: ${alignr}${font Ubuntu:normal:size=9}$color2${downspeed wlp3s0} / ${totaldown wlp3s0}
-${offset 110}${downspeedgraph wlp3s0 40,220 009999 80ffff 100}
+${offset 110}${downspeedgraph wlp3s0 40,220 009999 80ffff -l -t}
 ${color4}${hr 2}
