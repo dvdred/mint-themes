@@ -1,3 +1,9 @@
+#### ATTENTION: THIS TEMPLATE REQUIRES EXTRA TOOL, follow the comments ######
+### sudo apt get install -y fping nmap sockstat
+### wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/
+#### NEXT: CHANGE TO YOUR USERNAME
+### sudo echo '# Permission to socket stats' > /etc/sudoers.d/conky_cyan; sudo echo 'Defaults:YOUR_USER !requiretty' >> /etc/sudoers.d/conky_cyan; sudo echo 'YOUR_USER ALL=NOPASSWD: /usr/bin/sockstat' >> /etc/sudoers.d/conky_cyan;
+
 background yes
 update_interval 1
 
@@ -17,7 +23,7 @@ uppercase no
 gap_x 1150
 gap_y 70
 minimum_size 300 900
-maximum_width 240
+maximum_width 285
 
 own_window yes
 own_window_type normal
@@ -51,17 +57,23 @@ color5 b30000
 # Red
 color5 b30000
 
+NETCARD wlp3s0
+
 ## System information using conky capabilities
 
 TEXT
 ${font Ubuntu:bold:size=10}${color5}NET Details: ${color4}${hr 2}
 ${voffset 2}
-${offset 10}${font Ubuntu:bold:size=10}${color1}FAST PING FROM: ${color4}${execi 3600 ip addr show | grep wlp3s0|grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2}
-${offset 10}${font Ubuntu:bold:size=10}${color1}GATEWAY: ${color4}${execi 3600 route -n | grep UG | awk '{ print $2}'}
-${offset 10}${font Ubuntu:bold:size=10}${color1}DNS: ${color4}${execi 3600 nmcli dev show | grep DNS | awk '{ print $2}'}
-${offset 10}${color1}${font Ubuntu:bold:size=9}${color1}ALIVE IP (refresh/5min): ${offset 15}${color4}${font Ubuntu:bold:size=9}${execi 600 echo && NET=$(ip addr show | grep wlp3s0|grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2) && fping -ga -r1 $NET 2>/dev/null | sort -n}
+${offset 10}${font Ubuntu:bold:size=10}${color1}FAST PING SOURCE: ${color5}${execi 3600 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && echo $NETCARD}
+${color4}${execi 3600 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && ip addr show | grep $NETCARD |grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2}
+${offset 10}${font Ubuntu:bold:size=10}${color1}GATEWAY
+${color4}${execi 3600 route -n | grep UG | awk '{ print $2}'}
+${offset 10}${font Ubuntu:bold:size=10}${color1}DNS
+${color4}${execi 3600 nmcli dev show | grep DNS | awk '{ print $2}'}
+${offset 10}${font Ubuntu:bold:size=10}${color1}SPEED TEST (refresh/2h)
+${color4}${execi 7200 speedtest-cli --bytes --simple }
 ${color4}${hr 2}
-${offset 5}${color1}${font Ubuntu:bold:size=10}Open ports: ${color5}${tcp_portmon 1 65535 count}
+${offset 5}${color1}${font Ubuntu:bold:size=10}OUTBOUND CONNECTION: ${color5}${tcp_portmon 1 65535 count}
 ${offset 10}${color1}${font Ubuntu:bold:size=9}URL${alignr}PORT
 ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 0}${alignr}${tcp_portmon 1 65535 rport 0}
 ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 1}${alignr}${tcp_portmon 1 65535 rport 1}
@@ -70,5 +82,9 @@ ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 r
 ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 4}${alignr}${tcp_portmon 1 65535 rport 4}
 ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 5}${alignr}${tcp_portmon 1 65535 rport 5}
 ${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 6}${alignr}${tcp_portmon 1 65535 rport 6}
-#${offset 60}${color1}- ${font Ubuntu:bold:size=9}${color4}${nvidia gpufreq} NVIDIA
+${offset 5}${color1}${font Ubuntu:bold:size=10}LISTEN SERVICES (refresh/3min): ${color5}${execi 180 sudo sockstat -l | grep -v FOREIGN | wc -l}
+${color1}${font Ubuntu:bold:size=10}${color5}${execi 180 sudo sockstat -l | grep -v PROTO| awk '{ print $2" - "$4" - "$5}'}
 ${color4}${hr 2}
+${offset 10}${color1}${font Ubuntu:bold:size=9}${color1}ALIVE IP (refresh/5min): ${offset 15}${color4}${font Ubuntu:bold:size=9}${execi 600 echo && NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && NET=$(ip addr show | grep ${NETCARD}|grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2) && fping -ga -r1 $NET 2>/dev/null | sort -n}
+${color4}${hr 2}
+

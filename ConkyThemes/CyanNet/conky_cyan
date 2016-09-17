@@ -1,3 +1,5 @@
+### ATTENTION: YOU MUST CHANGE THE wlp3s0 NETWORK INTERFACE NAME IN THIS FILE AND THE .lua REFERENCED ###
+
 background yes
 update_interval 1
 
