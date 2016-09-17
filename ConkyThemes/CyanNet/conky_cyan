@@ -103,14 +103,4 @@ ${offset 130}${color1}${font Ubuntu:bold:size=9}Up: ${alignr}${font Ubuntu:norma
 ${offset 110}${upspeedgraph wlp3s0 40,220 660000 b30000 100}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Down: ${alignr}${font Ubuntu:normal:size=9}$color2${downspeed wlp3s0} / ${totaldown wlp3s0}
 ${offset 110}${downspeedgraph wlp3s0 40,220 009999 80ffff 100}
-${offset 5}${color1}${font Ubuntu:bold:size=10}Open ports: ${color5}${tcp_portmon 1 65535 count}
-${offset 10}${color1}${font Ubuntu:bold:size=9}URL${alignr}PORT
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 0}${alignr}${tcp_portmon 1 65535 rport 0}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 1}${alignr}${tcp_portmon 1 65535 rport 1}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 2}${alignr}${tcp_portmon 1 65535 rport 2}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 3}${alignr}${tcp_portmon 1 65535 rport 3}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 4}${alignr}${tcp_portmon 1 65535 rport 4}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 5}${alignr}${tcp_portmon 1 65535 rport 5}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 6}${alignr}${tcp_portmon 1 65535 rport 6}
-#${offset 60}${color1}- ${font Ubuntu:bold:size=9}${color4}${nvidia gpufreq} NVIDIA
 ${color4}${hr 2}
