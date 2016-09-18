@@ -75,13 +75,13 @@ ${color4}${texeci 7200 speedtest-cli --bytes --simple }
 ${color4}${hr 2}
 ${offset 5}${color1}${font Ubuntu:bold:size=10}OUTBOUND CONNECTION: ${color5}${tcp_portmon 1 65535 count}
 ${offset 10}${color1}${font Ubuntu:bold:size=9}URL${alignr}PORT
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 0}${alignr}${tcp_portmon 1 65535 rport 0}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 1}${alignr}${tcp_portmon 1 65535 rport 1}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 2}${alignr}${tcp_portmon 1 65535 rport 2}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 3}${alignr}${tcp_portmon 1 65535 rport 3}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 4}${alignr}${tcp_portmon 1 65535 rport 4}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 5}${alignr}${tcp_portmon 1 65535 rport 5}
-${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rhost 6}${alignr}${tcp_portmon 1 65535 rport 6}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 0}${alignr}${tcp_portmon 1 65535 rport 0}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 1}${alignr}${tcp_portmon 1 65535 rport 1}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 2}${alignr}${tcp_portmon 1 65535 rport 2}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 3}${alignr}${tcp_portmon 1 65535 rport 3}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 4}${alignr}${tcp_portmon 1 65535 rport 4}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 5}${alignr}${tcp_portmon 1 65535 rport 5}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 6}${alignr}${tcp_portmon 1 65535 rport 6}
 ${offset 5}${color1}${font Ubuntu:bold:size=10}LISTEN SERVICES (refresh/3min): ${color5}${execi 180 sudo sockstat -l | grep -v FOREIGN | wc -l}
 ${color1}${font Ubuntu:bold:size=10}${color5}${execi 180 sudo sockstat -l | grep -v PROTO| awk '{ print $2" - "$4" - "$5}'}
 ${color4}${hr 2}
