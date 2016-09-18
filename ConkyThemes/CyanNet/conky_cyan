@@ -88,7 +88,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 4}${alignr}${top c
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 5}${alignr}${top cpu 5}%
 
 #Showing memory part with TOP 5
-${voffset 20}
+${voffset 45}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}MEM
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top_mem name 1}${alignr}${top_mem mem 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top_mem name 2}${alignr}${top_mem mem 2}%
@@ -97,7 +97,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${t
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 5}%
 
 # Showing disk partitions: Root, Custom (template2), Shared (template3)
-${voffset 35}
+${voffset 10}
 ${offset 130}${diskiograph 33,183 666666 666666}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}DISKS
 # NOT WORKING FOR SSD DISKS, UNCOMMENT NEXT IF IT IS A MECHANICAL DISK
