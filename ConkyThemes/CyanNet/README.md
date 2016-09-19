@@ -20,7 +20,7 @@
 ### ```sudo apt-get install -y fping nmap sockstat```
 ### ```wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/```
 ### ```MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /tmp/conky_cyan;```
-### ```sudo su; mv /tmp/conky_cyan /etc/sudoers.d/; exit;```
+### ```sudo su;chown root. /tmp/conky_cyan; mv /tmp/conky_cyan /etc/sudoers.d/; exit;```
 
 
 # Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
