@@ -17,9 +17,10 @@
 
 # EXTRA
 ## to use the "conky_netmap" you need:
-### ```sudo apt get install -y fping nmap sockstat```
+### ```sudo apt-get install -y fping nmap sockstat```
 ### ```wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/```
-### ```MY_USER=$(whoami) && sudo echo '# Permission to socket stats' > /etc/sudoers.d/conky_cyan; sudo echo "Defaults:$MY_USER !requiretty" >> /etc/sudoers.d/conky_cyan; sudo echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /etc/sudoers.d/conky_cyan;```
+### ```MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /tmp/conky_cyan;```
+### ```sudo su; mv /tmp/conky_cyan /etc/sudoers.d/; exit;```
 
 
 # Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
