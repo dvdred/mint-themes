@@ -41,7 +41,7 @@ own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below
 border_inner_margin 0
 border_outer_margin 0
 alignment top_middle
-ximerama_head = 0
+#ximerama_head = 0
 
 draw_shades no
 draw_outline no
@@ -79,7 +79,7 @@ ${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: ${color4}$uptime
 ${voffset 20}
 ${offset 120}${cpugraph 40,183 666666 666666}${voffset -25}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}CPU
-${offset 105}${font Ubuntu:bold:size=9}${color4}CPU ${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}°C${else}${hwmon 1 temp 1}°C${endif} ${if_existing /sys/class/hwmon/hwmon1/temp2_input} -  GPU ${hwmon 1 temp 2}°C${else} - GPU temp not detected ${endif}
+${offset 105}${font Ubuntu:bold:size=9}${color4}CPU ${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}°C${else}${if_existing /sys/class/hwmon/hwmon1/temp1_input}${hwmon 1 temp 1}°C${else}temp not detected${endif}{else}temp not detected${endif}${if_existing /sys/class/hwmon/hwmon1/temp2_input} -  GPU ${hwmon 1 temp 2}°C${else} - GPU temp not detected${endif}
 # Showing TOP 5 CPU-consumers
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top name 1}${alignr}${top cpu 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top name 2}${alignr}${top cpu 2}%
