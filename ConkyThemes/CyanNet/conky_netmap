@@ -62,8 +62,9 @@ ${color4}${execi 600 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| 
 ${offset 10}${font Ubuntu:bold:size=10}${color1}GATEWAY
 ${color4}${execi 600 route -n | grep UG | awk '{ print $2}'}
 ${offset 10}${font Ubuntu:bold:size=10}${color1}DNS
-${color4}${execi 600 VER=$(nmcli --version | awk '{print $4}' | cut -d "." -f 1) ; [[ "$VER" -lt "1" ]] && ( nmcli dev list | grep DNS | awk '{ print $2}' ) || ( nmcli dev show | grep DNS | awk '{ print $2}' )}
-${if_empty ${execi 60 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep ESSID | grep -v 'ESSID:off'}} NoWireless 
+${color4}${execi 600 ./dnsprobe.sh}
+${if_empty ${execi 60 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD 2>/dev/null | grep ESSID | grep -v 'ESSID:off'}}
+${offset 10}${font Ubuntu:bold:size=10}${color1}ETHERNET: ${color4}${execi 600 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && ethtool $NETCARD 2>/dev/null| grep Speed}
 $else 
 ${offset 10}${font Ubuntu:bold:size=10}${color1}WIRELESS: ${color5}${execi 300 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep ESSID | awk '{print $4}'}
 ${color4}${execi 300 NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep Rate}
