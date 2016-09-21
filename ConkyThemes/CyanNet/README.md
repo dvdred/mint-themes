@@ -1,3 +1,6 @@
+# Screenshot
+![screenshot.png](./screenshot.png)
+
 # Customization
 
 ## Edit the DEFAULTS value in the configuration file "conky_cyan"
