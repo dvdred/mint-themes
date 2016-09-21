@@ -1,8 +1,10 @@
 # Screenshot
 ![screenshot.png](./screenshot.png)
 
-# Customization
+# Install the theme:
+## ```$ cd tmp; git clone https://github.com/dvdred/mint-themes.git; mv mint-themes/ConkyThemes/CyanNet ~/.conky```
 
+# Customization
 ## Edit the DEFAULTS value in the configuration file "conky_cyan"
 ## ```template1``` ("wlp3s0") name of the active network interfaces
 ## ```template2``` ("/DATA") First custom folder to watch other than root.
