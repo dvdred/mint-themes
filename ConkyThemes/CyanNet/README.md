@@ -1,6 +1,9 @@
 # Screenshot
 ![screenshot.png](./screenshot.png)
 
+# Prerequisites
+## The ```conky``` software is *required* and ```conky-manager``` is useful to run the dual panel included in this theme.
+
 # Install the theme:
 ## ```$ cd tmp; git clone https://github.com/dvdred/mint-themes.git; mv mint-themes/ConkyThemes/CyanNet ~/.conky```
 
@@ -22,7 +25,7 @@
 # EXTRA
 ## to use the "conky_netmap" you need:
 ### ```sudo apt-get install -y fping nmap sockstat```
-### ```wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/```
+### ```wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && chmod +x speedyytest-cli && sudo mv speedtest-cli /bin/```
 ### ```MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /tmp/conky_cyan;```
 ### ```sudo chown root. /tmp/conky_cyan; sudo mv /tmp/conky_cyan /etc/sudoers.d/;```
 ## You can set refresh time in the ```conky_netmap``` using "templateN"
