@@ -77,7 +77,7 @@ ${offset 15}${font Ubuntu:normal:size=10}${color1}Local Time: ${color4}$time
 ${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: ${color4}$uptime
 
 # Showing CPU Graph
-${voffset 20}
+${voffset 15}
 ${offset 120}${cpugraph 40,183 666666 666666}${voffset -25}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}CPU
 ${offset 105}${font Ubuntu:bold:size=9}${color4}CPU ${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}°C${else}${if_existing /sys/class/hwmon/hwmon1/temp1_input}${hwmon 1 temp 1}°C${else}temp not detected${endif}{else}temp not detected${endif}${if_existing /sys/class/hwmon/hwmon1/temp2_input} -  GPU ${hwmon 1 temp 2}°C${else} - GPU temp not detected${endif}
@@ -89,7 +89,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 4}${alignr}${top c
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 5}${alignr}${top cpu 5}%
 
 #Showing memory part with TOP 5
-${voffset 45}
+${voffset 40}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}MEM
 ${offset 105}${font Ubuntu:normal:size=10}${color4}${top_mem name 1}${alignr}${top_mem mem 1}%
 ${offset 105}${font Ubuntu:normal:size=10}${color1}${top_mem name 2}${alignr}${top_mem mem 2}%
@@ -98,7 +98,7 @@ ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${t
 ${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 5}%
 
 # Showing disk partitions: Root, Custom (template2), Shared (template3)
-${voffset 10}
+${voffset 5}
 ${offset 130}${diskiograph 33,183 666666 666666}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}DISKS
 # NOT WORKING FOR SSD DISKS, UNCOMMENT NEXT IF IT IS A MECHANICAL DISK
@@ -108,7 +108,7 @@ ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=
 ${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free ${template2}}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used ${template2}}
 
 # Network data: Active interface (template1)
-${voffset 20}
+${voffset 15}
 ${offset 90}${font Ubuntu:bold:size=10}${color5}NET
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Local${color4}${alignr}${font Ubuntu:bold:size=9}${addr ${template1}}
 ${offset 130}${color1}${font Ubuntu:bold:size=9}Public${color5}${alignr}${font Ubuntu:bold:size=9}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
