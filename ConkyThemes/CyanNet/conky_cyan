@@ -71,6 +71,7 @@ lua_draw_hook_post main
 
 TEXT
 ${font Ubuntu:bold:size=10}${color4}SYSTEM: ${alignc}$nodename ${hr 2}
+${offset 15}${font Ubuntu:normal:size=10}${color1}OS: ${color4}${execi 3600 lsb_release -d | cut -f 2| tr "[:upper:]" "[:lower:]"}
 ${offset 15}${font Ubuntu:normal:size=10}${color1}Architecture: ${color4}$sysname $kernel $machine
 ${offset 15}${font Ubuntu:normal:size=10}${color1}Local Time: ${color4}$time
 ${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: ${color4}$uptime
