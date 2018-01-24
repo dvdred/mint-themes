@@ -24,7 +24,7 @@ DEFAULTS value in the configuration file ```conky_cyan```
 - ```template2``` ("/DATA") First custom folder to watch other than root
 - ```template3``` ("/Share") Second custom folder to watch other than root
 
-DEFAULTS value in the configuration file ```conky_cyan```
+DEFAULTS value in the configuration file ```conky_net```
 
 ```
 ### LowRefreshRate (default 2 hours)
