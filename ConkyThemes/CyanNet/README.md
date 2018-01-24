@@ -3,11 +3,20 @@
 
 # Prerequisites
 The ```conky``` software is *required* and ```conky-manager``` is useful to run the dual panel included in this theme.
-For *conky-manager* I used this repo
-```deb http://ppa.launchpad.net/teejee2008/ppa/ubuntu xenial main```
+For *conky-manager* I used the next repo:
+
 
 # Install the theme:
 ```$ cd /tmp; git clone https://github.com/dvdred/mint-themes.git; mv mint-themes/ConkyThemes/CyanNet ~/.conky```
+
+## Only for the "conky_netmap" you need:
+
+```
+sudo apt install -y fping nmap sockstat
+wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/
+MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /tmp/conky_cyan;
+sudo chown root. /tmp/conky_cyan; sudo mv /tmp/conky_cyan /etc/sudoers.d/
+```
 
 # Customization
 Edit the DEFAULTS value in the configuration file "conky_cyan"
@@ -15,22 +24,8 @@ Edit the DEFAULTS value in the configuration file "conky_cyan"
 ```template2``` ("/DATA") First custom folder to watch other than root.
 ```template3``` ("/Share") Second custom folder to watch other than root.
 
-# Fix and Feature 
+You can set the various refresh time in the ```conky_netmap``` using "template*N*" changing the next default values:
 
-- Fixed syntax for conky version released with Linux Mint 18
-- Fixed visualization distorsion
-- Customized color of some elements, included graph
-- Added a new conky conf for network advanced information and discovery (use conky-manager to have both displayed). Read the EXTRA notes for use it.
-- Parametrized all possible variable (*)
-* SOMEONE smarter than me can discover howto dinamically retrive the name of active interface to make possible to valorize "template1" variable !
-
-# EXTRA
-## to use the "conky_netmap" you need:
-```sudo apt-get install -y fping nmap sockstat```
-```wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py && chmod +x speedtest-cli && sudo mv speedtest-cli /bin/```
-```MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo "$MY_USER ALL=NOPASSWD: /usr/bin/sockstat" >> /tmp/conky_cyan;```
-```sudo chown root. /tmp/conky_cyan; sudo mv /tmp/conky_cyan /etc/sudoers.d/;```
-You can set the various refresh time in the ```conky_netmap``` using "templateN" changing the next default value:
 ```
 ## LowRefreshRate (default 2 hours)
 template1 7200
@@ -39,5 +34,14 @@ template2 600
 ## HighRefreshRate (default 3 min)
 template3 180
 ```
+
+# Fix and Feature
+
+- Fixed syntax for conky version released with Linux Mint 18
+- Fixed visualization distorsion
+- Customized color of some elements, included graph
+- Added a new conky conf for network advanced information and discovery (use conky-manager to have both displayed). Read the EXTRA notes for use it.
+- Parametrized all possible variable (*)
+* SOMEONE smarter than me can discover howto dinamically retrive the name of active interface to make possible to valorize "template1" variable !
 
 # Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
