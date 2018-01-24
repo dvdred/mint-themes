@@ -26,12 +26,12 @@ DEFAULTS value in the configuration file ```conky_cyan```
 
 DEFAULTS value in the configuration file ```conky_cyan```
 
-- ```
-## LowRefreshRate (default 2 hours)
+```
+### LowRefreshRate (default 2 hours)
 template1 7200
-## MediumRefreshRate (default 10 min)
+### MediumRefreshRate (default 10 min)
 template2 600
-## HighRefreshRate (default 3 min)
+### HighRefreshRate (default 3 min)
 template3 180
 ```
 
