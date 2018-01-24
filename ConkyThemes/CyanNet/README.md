@@ -3,7 +3,7 @@
 
 # Prerequisites
 The ```conky``` software is *required* and ```conky-manager``` is useful to run the dual panel included in this theme.
-For *conky-manager* I used the next repo:
+For *conky-manager* I used the following repo:
 ```sudo add-apt-repository ppa:teejee2008/ppa; sudo apt update```
 
 # Install the theme:
@@ -19,12 +19,12 @@ sudo chown root. /tmp/conky_cyan; sudo mv /tmp/conky_cyan /etc/sudoers.d/
 ```
 
 # Customization
-DEFAULTS value in the configuration file ```conky_cyan```
+DEFAULTS values in the configuration file ```conky_cyan```
 - ```template1``` ("wlp3s0") name of the active network interfaces
 - ```template2``` ("/DATA") First custom folder to watch other than root
 - ```template3``` ("/Share") Second custom folder to watch other than root
 
-DEFAULTS value in the configuration file ```conky_net```
+DEFAULTS values in the configuration file ```conky_net```
 
 ```
 ### LowRefreshRate (default 2 hours)
@@ -44,4 +44,4 @@ template3 180
 - Parametrized all possible variable (*)
 * SOMEONE smarter than me can discover howto dinamically retrive the name of active interface to make possible to valorize "template1" variable !
 
-# Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
+## Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
