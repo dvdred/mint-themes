@@ -1,0 +1,97 @@
+#ATTENTION: THIS TEMPLATE REQUIRES EXTRA TOOLS, follow the instruction in README.md ######
+#Timing Templates, define your Refresh time
+#LowRefreshRate (default 2 hours)
+template1 7200
+#MediumRefreshRate (default 10 min)
+template2 300
+#HighRefreshRate (default 3 min)
+template3 90
+
+background yes
+update_interval 1
+cpu_avg_samples 1
+net_avg_samples 2
+temperature_unit celsius
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+override_utf8_locale yes
+use_xft yes
+xftfont caviar dreams:size=10
+xftalpha 0.5
+uppercase no
+
+gap_x 370
+gap_y 70
+minimum_size 300 900
+maximum_width 285
+
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_visual yes
+own_window_colour 000000
+own_window_argb_value 0
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 0
+border_outer_margin 0
+alignment top_right
+#ximerama_head = 0
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+#Defining colors
+default_color FFFFFF
+#Shades of Gray
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Cyan
+color4 00b3b3
+# Green
+color5 b30000
+#Red
+color5 b30000
+
+#System information using conky capabilities
+TEXT
+${font Ubuntu:bold:size=10}${color5}NET Details: ${color4}${hr 2}
+${offset 10}${font Ubuntu:bold:size=10}${color1}FAST PING SOURCE: ${color5}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && echo $NETCARD}
+${color4}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && ip addr show | grep $NETCARD |grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2}
+${offset 10}${font Ubuntu:bold:size=10}${color1}GATEWAY(s)
+${color4}${execi ${template2} route -n | grep UG | awk '{ print $2,$8}' | sort | uniq }
+${offset 10}${font Ubuntu:bold:size=10}${color1}DNS
+${color4}${execi ${template2} ./dnsprobe.sh}
+${if_empty ${execi ${template3} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD 2>/dev/null | grep ESSID | grep -v 'ESSID:off'}}
+${offset 10}${font Ubuntu:bold:size=10}${color1}ETHERNET: ${color4}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && ethtool $NETCARD 2>/dev/null| grep Speed}
+$else 
+${offset 10}${font Ubuntu:bold:size=10}${color1}WIRELESS: ${color5}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep ESSID | awk '{print $4}'}
+${color4}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep Rate| awk '{print "| "$1 $2" "$3" | "$4" "$5" |"}'}
+${color4}${execi ${template2} NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && iwconfig $NETCARD | grep Link| awk '{print "| "$1 $2" "$3" | "$4" "$5" |"}'}
+$endif
+${offset 10}${font Ubuntu:bold:size=10}${color1}SPEED TEST (refresh ${template1} s)
+${color4}${texeci ${template1} speedtest-cli --bytes --simple }
+${color4}${hr 2}
+${offset 5}${color1}${font Ubuntu:bold:size=10}CONNECTION OUT: total n° ${color5}${tcp_portmon 1 65535 count}
+${offset 10}${color1}${font Ubuntu:bold:size=9}IP/URL${alignr}PORT (last 10 connections)
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 0}${alignr}${tcp_portmon 1 65535 rport 0}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 1}${alignr}${tcp_portmon 1 65535 rport 1}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 2}${alignr}${tcp_portmon 1 65535 rport 2}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 3}${alignr}${tcp_portmon 1 65535 rport 3}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 4}${alignr}${tcp_portmon 1 65535 rport 4}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 5}${alignr}${tcp_portmon 1 65535 rport 5}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 6}${alignr}${tcp_portmon 1 65535 rport 6}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 7}${alignr}${tcp_portmon 1 65535 rport 7}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 8}${alignr}${tcp_portmon 1 65535 rport 8}
+${offset 8}${color1}- ${font Ubuntu:bold:size=9}${color4}${tcp_portmon 1 65535 rip 9}${alignr}${tcp_portmon 1 65535 rport 9}
+${offset 5}${color1}${font Ubuntu:bold:size=10}LISTEN SERVICES (refresh ${template3} s): ${color5}${execi ${template3} sudo sockstat -l | grep -v FOREIGN | wc -l}
+${color1}${font Ubuntu:bold:size=10}${color4}${execi ${template3} sudo sockstat -l | grep -v PROTO| awk '{ print $2" - "$4" - "$5}'}
+${color4}${hr 2}
+${offset 10}${color1}${font Ubuntu:bold:size=9}${color1}ALIVE IP (refresh ${template2} s): ${texeci ${template2} echo && NETCARD=$(ip -o link show | awk '{print $2,$9}' | grep UP| cut -d ":" -f 1| head -n1) && export NET=$(ip addr show | grep ${NETCARD}|grep -w inet |grep -v 127.0.0.1|awk '{ print $2}'| cut -d " " -f 2) && printf "%14s %14s %14s\n" $(fping -ga -r1 $NET 2>/dev/null | sort -n) > /tmp/conky-ping} ${color5}${execi 300 cat /tmp/conky-ping | wc -w}
+${color4}${font Ubuntu:bold:size=9}${execi 120 cat /tmp/conky-ping | column -c3}
+${color4}${hr 2}

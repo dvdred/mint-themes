@@ -1,0 +1,125 @@
+#ATTENTION: CHANGE THE NEXT VALUE TO YOUR NEEDS, this is the only file needing edit these value, other configuration files are parametrized ###
+
+#Defining Template used in graph and fixed object monitoring
+#Network Interface to monitor
+template1 wlp3s0
+#template1 enp2s0
+#Custom Folder
+template2 /home
+#Share Folder
+template3 /var/
+
+background yes
+update_interval 1
+
+cpu_avg_samples 1
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+override_utf8_locale yes
+use_xft yes
+xftfont caviar dreams:size=10
+xftalpha 0.5
+uppercase no
+
+gap_x 20
+gap_y 70
+minimum_size 300 900
+maximum_width 350
+
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_visual yes
+own_window_colour 000000
+own_window_argb_value 0
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 0
+border_outer_margin 0
+alignment top_right
+#ximerama_head = 0
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+show_graph_range yes
+
+#Defining colors
+default_color FFFFFF
+#Shades of Gray
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Cyan
+color4 00b3b3
+#Green
+color5 b30000
+#Red
+color5 b30000
+
+
+#Loading lua script for drawning rings
+lua_load ./seamod_rings.lua
+lua_draw_hook_post main
+
+#System information using conky capabilities
+
+TEXT
+${font Ubuntu:bold:size=10}${color4}SYSTEM: ${alignc}$nodename ${hr 2}
+${offset 15}${font Ubuntu:normal:size=10}${color1}OS: ${color4}${execi 3600 lsb_release -d | cut -f 2| tr "[:upper:]" "[:lower:]"}
+${offset 15}${font Ubuntu:normal:size=10}${color1}Architecture: ${color4}$sysname $kernel $machine
+${offset 15}${font Ubuntu:normal:size=10}${color1}Local Time: ${color4}$time
+${offset 15}${font Ubuntu:normal:size=10}${color1}Uptime: ${color4}$uptime
+
+#Showing CPU Graph
+${voffset 10}
+${offset 120}${cpugraph 40,183 666666 666666}${voffset -25}
+${offset 90}${font Ubuntu:bold:size=10}${color5}CPU
+${offset 105}${font Ubuntu:bold:size=9}${color4}CPU ${if_existing /sys/class/hwmon/hwmon0/temp1_input}${hwmon 0 temp 1}°C${else}${if_existing /sys/class/hwmon/hwmon1/temp1_input}${hwmon 1 temp 1}°C${else}temp not detected${endif}{else}temp not detected${endif}${if_existing /sys/class/hwmon/hwmon1/temp2_input} -  GPU ${hwmon 1 temp 2}°C${else} - GPU temp not detected${endif}
+#Showing TOP 5 CPU-consumers
+${offset 105}${font Ubuntu:normal:size=10}${color4}${top name 1}${alignr}${top cpu 1}%
+${offset 105}${font Ubuntu:normal:size=10}${color1}${top name 2}${alignr}${top cpu 2}%
+${offset 105}${font Ubuntu:normal:size=10}${color2}${top name 3}${alignr}${top cpu 3}%
+${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 4}${alignr}${top cpu 4}%
+${offset 105}${font Ubuntu:normal:size=10}${color3}${top name 5}${alignr}${top cpu 5}%
+
+#Showing memory part with TOP 5
+# Showing MEM Graph
+${voffset 10}
+${offset 120}${alignr}${memgraph 40,183 666666 666666}${voffset -25}
+${offset 90}${font Ubuntu:bold:size=10}${color5}MEM 
+${offset 105}${font Ubuntu:bold:size=10}${color4}${mem}/${memmax}
+${offset 105}${font Ubuntu:normal:size=10}${color4}${top_mem name 1}${alignr}${top_mem mem 1}%
+${offset 105}${font Ubuntu:normal:size=10}${color1}${top_mem name 2}${alignr}${top_mem mem 2}%
+${offset 105}${font Ubuntu:normal:size=10}${color2}${top_mem name 3}${alignr}${top_mem mem 3}%
+${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 4}%
+${offset 105}${font Ubuntu:normal:size=10}${color3}${top_mem name 4}${alignr}${top_mem mem 5}%
+
+# Showing disk partitions: Root, Custom (template2), Shared (template3)
+${voffset 1}
+${offset 130}${diskiograph 33,183 666666 666666}
+${offset 90}${font Ubuntu:bold:size=10}${color5}DISKS
+#NOT WORKING FOR SSD DISKS, UNCOMMENT NEXT IF IT IS A MECHANICAL DISK
+#${offset 120}${font Ubuntu:bold:size=9}${color4}${hddtemp /dev/sda}°C
+${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free /}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used /}
+${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free ${template3}}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used ${template3}}
+${offset 130}${font Ubuntu:bold:size=9}${color1}Free: ${font Ubuntu:normal:size=9}${fs_free ${template2}}${alignr}${font Ubuntu:bold:size=9}Used: ${font Ubuntu:normal:size=9}${fs_used ${template2}}
+
+#Network data: Active interface (template1)
+${voffset 15}
+${offset 90}${font Ubuntu:bold:size=10}${color5}NET
+${offset 130}${color1}${font Ubuntu:bold:size=9}Interface${color4}${alignr}${font Ubuntu:bold:size=9}${template1}
+${offset 130}${color1}${font Ubuntu:bold:size=9}Local${color4}${alignr}${font Ubuntu:bold:size=9}${addr ${template1}}
+${offset 130}${color1}${font Ubuntu:bold:size=9}Public${color5}${alignr}${font Ubuntu:bold:size=9}${execi 3600 curl -s ident.me }
+${voffset 20}
+${offset 130}${color1}${font Ubuntu:bold:size=9}Up: ${alignr}${font Ubuntu:normal:size=9}$color2${upspeed ${template1}} / ${totalup ${template1}}
+${offset 110}${upspeedgraph ${template1} 40,220 660000 b30000 -l -t}
+${offset 130}${color1}${font Ubuntu:bold:size=9}Down: ${alignr}${font Ubuntu:normal:size=9}$color2${downspeed ${template1}} / ${totaldown ${template1}}
+${offset 110}${downspeedgraph ${template1} 40,220 009999 80ffff -l -t}
+${color4}${hr 2}
