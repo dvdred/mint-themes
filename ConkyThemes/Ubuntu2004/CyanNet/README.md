@@ -3,7 +3,7 @@
 
 # Prerequisites
 The ```conky``` software is *required* and ```conky-manager``` is optional but useful to run the dual panel included in this theme.
-At this time i can't find a trusted ppa on Ubuntu 20.03 for *conky-manager*
+At this time i can't find a trusted ppa on Ubuntu 20.04 for *conky-manager*
 
 # Install the theme:
 ```$ cd /tmp; git clone https://github.com/dvdred/mint-themes.git; rsync -avhP ../CyanNet ~/.conky/CyanNet```
