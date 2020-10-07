@@ -1,5 +1,5 @@
 # Screenshot
-![screenshot.png](./screenshot.png)
+![screenshotsample.png](./screenshotsample.png)
 
 # Prerequisites
 The ```conky``` software is *required* and ```conky-manager``` is optional but useful to run the dual panel included in this theme.
