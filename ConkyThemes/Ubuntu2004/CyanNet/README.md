@@ -6,7 +6,7 @@ The ```conky``` software is *required* and ```conky-manager``` is optional but u
 At this time i can't find a trusted ppa on Ubuntu 20.04 for *conky-manager*
 
 # Install the theme:
-```$ cd /tmp; git clone https://github.com/dvdred/mint-themes.git; rsync -avhP ../CyanNet ~/.conky/CyanNet```
+```$ rsync -avhP ../CyanNet ~/.conky/CyanNet```
 
 ## Only for the "conky_netmap" you need:
 
