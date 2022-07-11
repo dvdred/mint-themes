@@ -2,13 +2,9 @@
 ![screenshotsample.png](./screenshotsample.png)
 
 # Prerequisites
-The ```conky``` software is *required* and ```conky-manager``` is optional but useful to run the dual panel included in this theme.
-At this time i can't find a trusted ppa on Ubuntu 20.04 for *conky-manager*
+The ```conky``` software is *required* and ```conky-manager``` is optional but useful to run the dual panel included in this theme, but at this time i can't find a trusted ppa on Ubuntu 20.04 for *conky-manager*
 
-# Install the theme:
-```$ rsync -avhP ../CyanNet ~/.conky/CyanNet```
-
-## Only for the "conky_netmap" you need:
+## Only for the "conky_netmap" panel you need:
 
 ```
 sudo apt install -y fping nmap sockstat
@@ -17,30 +13,38 @@ MY_USER=$(whoami) && echo '# Permission to socket stats' > /tmp/conky_cyan; echo
 sudo chown root. /tmp/conky_cyan; sudo mv /tmp/conky_cyan /etc/sudoers.d/
 ```
 
-# Customization
-DEFAULTS values in the configuration file ```conky_cyan```
-- ```template1``` ("wlp3s0") name of local network interfaces, useful when it is not active (can't be autodiscovered)
+# Install the theme:
+```
+$ git clone https://github.com/dvdred/mint-themes.git; cd mint-themes
+$ rsync -avhP ConkyThemes/Ubuntu2004/CyanNet ~/.conky/CyanNet
+```
+
+# Customization 
+To point the  right network interface to monitor you have to declare it in the configuration file, or accept the DEFAULTS VALUES, in the configuration file ```~/.conky/CyanNet/conky_cyan``` :
+- ```template1``` ("wlp3s0") is the name of the local network interfaces to watch (can't be autodiscovered, if not active)
 - ```template2``` ("/DATA") First custom folder to watch other than root
 - ```template3``` ("/Share") Second custom folder to watch other than root
 - ```template4``` (Dynamic) used where is possible: autodiscovered active network interface
 
-DEFAULTS values in the configuration file ```conky_net```
+You can also adjust polling timing for some checks, or accept the DEFAULTS VALUES in the configuration file ```~/.conky/CyanNet/conky_net```
 
 ```
 ### LowRefreshRate (default 2 hours)
-template1 7200
+template1 7200 # <------ speedtest check
 ### MediumRefreshRate (default 10 min)
-template2 600
+template2 600 # <------ IP Online check
 ### HighRefreshRate (default 3 min)
-template3 180
+template3 180 # <------ Listen Services check
 ```
 
-# Autostart script
+# Auto/Start script
 Due to the lack of Conky Manager, there is an autostart script ```conky-startup.sh``` that can be included in the start application menu of Ubuntu/Mint
 
-# Fix and Feature
+## Run Once:
+```$ cd ~/.conky/CyanNet; ./conky-startup.sh```
 
-- Fixed syntax for conky version released with Linux Mint 20 / Ubuntu 20.04
-- Fixed CPU temperature bug
+# Stop:
+```$ killall conky```
 
-## Many Thanks to the author of the original theme (Green Apple Desktop). You can include my fixes if you wish.
+### NOTES: 
+## Thanks to the author of the original theme [Green Apple Desktop](https://github.com/blackPantherOS/Conky-themes/tree/master/Green%20Apple%20Desktop). You can include my fixes if you like.
